@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouncy & Friends: The Magical Forest Adventure</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #87CEEB 0%, #98FB98 100%);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cartoon-container {
+            width: 800px;
+            height: 500px;
+            background: linear-gradient(to bottom, #87CEEB 0%, #87CEEB 60%, #90EE90 60%, #228B22 100%);
+            border: 5px solid #333;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Sun */
+        .sun {
+            position: absolute;
+            top: 30px;
+            right: 80px;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #FFD700 0%, #FFA500 100%);
+            border-radius: 50%;
+            animation: sunGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes sunGlow {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px #FFD700; }
+            50% { transform: scale(1.1); box-shadow: 0 0 30px #FFD700; }
+        }
+
+        /* Clouds */
+        .cloud {
+            position: absolute;
+            background: white;
+            border-radius: 50px;
+            opacity: 0.8;
+        }
+
+        .cloud1 {
+            top: 50px;
+            left: 100px;
+            width: 80px;
+            height: 40px;
+            animation: cloudFloat 8s linear infinite;
+        }
+
+        .cloud2 {
+            top: 80px;
+            left: -50px;
+            width: 60px;
+            height: 30px;
+            animation: cloudFloat 12s linear infinite;
+        }
+
+        @keyframes cloudFloat {
+            from { transform: translateX(-100px); }
+            to { transform: translateX(900px); }
+        }
+
+        /* Trees */
+        .tree {
+            position: absolute;
+            bottom: 120px;
+        }
+
+        .tree-trunk {
+            width: 20px;
+            height: 60px;
+            background: #8B4513;
+            margin: 0 auto;
+        }
+
+        .tree-leaves {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #228B22 0%, #006400 100%);
+            border-radius: 50%;
+            margin-top: -20px;
+            animation: treeSwaySubtle 4s ease-in-out infinite;
+        }
+
+        @keyframes treeSwaySubtle {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        .tree1 { left: 50px; }
+        .tree2 { right: 100px; }
+
+        /* Main Character - Bouncing Ball */
+        .character {
+            position: absolute;
+            bottom: 150px;
+            left: 100px;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle at 30% 30%, #FF69B4, #FF1493);
+            border-radius: 50%;
+            animation: characterBounce 2s ease-in-out infinite;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Character eyes */
+        .character::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 12px;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 15px 0 0 white;
+        }
+
+        .character::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 15px;
+            width: 4px;
+            height: 4px;
+            background: black;
+            border-radius: 50%;
+            box-shadow: 15px 0 0 black;
+        }
+
+        @keyframes characterBounce {
+            0%, 100% { 
+                transform: translateY(0) scaleY(1);
+                bottom: 150px;
+            }
+            25% { 
+                transform: translateY(-30px) scaleY(1.1);
+                bottom: 180px;
+            }
+            50% { 
+                transform: translateY(-50px) scaleY(0.9);
+                bottom: 200px;
+            }
+            75% { 
+                transform: translateY(-30px) scaleY(1.1);
+                bottom: 180px;
+            }
+        }
+
+        /* Companion - Flying Bird */
+        .bird {
+            position: absolute;
+            top: 150px;
+            left: 200px;
+            width: 30px;
+            height: 20px;
+            background: #4169E1;
+            border-radius: 50% 10px 50% 10px;
+            animation: birdFly 6s ease-in-out infinite;
+        }
+
+        .bird::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -10px;
+            width: 20px;
+            height: 10px;
+            background: #4169E1;
+            border-radius: 50%;
+            animation: wingFlap 0.3s ease-in-out infinite;
+        }
+
+        .bird::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            width: 20px;
+            height: 10px;
+            background: #4169E1;
+            border-radius: 50%;
+            animation: wingFlap 0.3s ease-in-out infinite reverse;
+        }
+
+        @keyframes birdFly {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(100px) translateY(-20px); }
+            50% { transform: translateX(200px) translateY(10px); }
+            75% { transform: translateX(100px) translateY(-10px); }
+        }
+
+        @keyframes wingFlap {
+            0%, 100% { transform: rotateZ(0deg); }
+            50% { transform: rotateZ(-20deg); }
+        }
+
+        /* Flowers */
+        .flower {
+            position: absolute;
+            bottom: 120px;
+            animation: flowerGrow 3s ease-in-out infinite;
+        }
+
+        .flower-stem {
+            width: 4px;
+            height: 30px;
+            background: #228B22;
+            margin: 0 auto;
+        }
+
+        .flower-petals {
+            width: 20px;
+            height: 20px;
+            background: #FF69B4;
+            border-radius: 50%;
+            position: relative;
+            margin-top: -10px;
+        }
+
+        .flower-petals::before,
+        .flower-petals::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #FF69B4;
+            border-radius: 50%;
+        }
+
+        .flower-petals::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .flower-petals::after {
+            top: 5px;
+            left: -10px;
+        }
+
+        .flower1 { left: 300px; animation-delay: 0s; }
+        .flower2 { left: 500px; animation-delay: 1s; }
+        .flower3 { left: 650px; animation-delay: 2s; }
+
+        @keyframes flowerGrow {
+            0% { transform: scale(0.8); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(0.8); }
+        }
+
+        /* Story Text */
+        .story-text {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 15px;
+            border-radius: 15px;
+            font-size: 16px;
+            color: #333;
+            max-width: 300px;
+            animation: textFade 8s ease-in-out infinite;
+        }
+
+        @keyframes textFade {
+            0%, 20%, 80%, 100% { opacity: 1; }
+            40%, 60% { opacity: 0.3; }
+        }
+
+        /* Controls */
+        .controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .control-btn {
+            background: linear-gradient(45deg, #FF69B4, #FF1493);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255,105,180,0.4);
+        }
+
+        .title {
+            color: #333;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="title">🌟 Bouncy & Friends: The Magical Forest Adventure 🌟</div>
+    
+    <div class="cartoon-container" id="cartoon">
+        <!-- Sky elements -->
+        <div class="sun"></div>
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        
+        <!-- Story text -->
+        <div class="story-text" id="storyText">
+            🌸 Once upon a time, Bouncy the pink ball discovered a magical forest full of wonders...
+        </div>
+        
+        <!-- Background elements -->
+        <div class="tree tree1">
+            <div class="tree-trunk"></div>
+            <div class="tree-leaves"></div>
+        </div>
+        <div class="tree tree2">
+            <div class="tree-trunk"></div>
+            <div class="tree-leaves"></div>
+        </div>
+        
+        <!-- Characters -->
+        <div class="character" id="character"></div>
+        <div class="bird" id="bird"></div>
+        
+        <!-- Foreground elements -->
+        <div class="flower flower1">
+            <div class="flower-stem"></div>
+            <div class="flower-petals"></div>
+        </div>
+        <div class="flower flower2">
+            <div class="flower-stem"></div>
+            <div class="flower-petals"></div>
+        </div>
+        <div class="flower flower3">
+            <div class="flower-stem"></div>
+            <div class="flower-petals"></div>
+        </div>
+    </div>
+    
+    <div class="controls">
+        <button class="control-btn" onclick="changeScene()">🎬 Next Scene</button>
+        <button class="control-btn" onclick="speedToggle()">⚡ Speed Toggle</button>
+        <button class="control-btn" onclick="addMagic()">✨ Add Magic</button>
+    </div>
+
+    <script>
+        let currentScene = 0;
+        let isSlowMotion = false;
+        
+        const storyTexts = [
+            "🌸 Once upon a time, Bouncy the pink ball discovered a magical forest full of wonders...",
+            "🐦 Soon, Bouncy met Chirpy the blue bird, who became their best friend!",
+            "🌟 Together, they explored the enchanted forest, making flowers bloom with joy!",
+            "🎉 And they lived happily ever after, spreading magic wherever they went!"
+        ];
+        
+        function changeScene() {
+            currentScene = (currentScene + 1) % storyTexts.length;
+            document.getElementById('storyText').textContent = storyTexts[currentScene];
+            
+            // Add scene-specific effects
+            const cartoon = document.getElementById('cartoon');
+            cartoon.style.filter = 'hue-rotate(' + (currentScene * 30) + 'deg)';
+            
+            // Make character jump excitedly
+            const character = document.getElementById('character');
+            character.style.animation = 'none';
+            setTimeout(() => {
+                character.style.animation = 'characterBounce 2s ease-in-out infinite';
+            }, 100);
+        }
+        
+        function speedToggle() {
+            isSlowMotion = !isSlowMotion;
+            const elements = document.querySelectorAll('.character, .bird, .sun, .cloud1, .cloud2, .flower');
+            
+            elements.forEach(el => {
+                if (isSlowMotion) {
+                    el.style.animationDuration = '8s';
+                } else {
+                    el.style.animationDuration = '';
+                }
+            });
+        }
+        
+        function addMagic() {
+            // Create sparkle effect
+            for (let i = 0; i < 10; i++) {
+                createSparkle();
+            }
+            
+            // Change background temporarily
+            const cartoon = document.getElementById('cartoon');
+            const originalFilter = cartoon.style.filter;
+            cartoon.style.filter = 'brightness(1.5) saturate(2) hue-rotate(45deg)';
+            
+            setTimeout(() => {
+                cartoon.style.filter = originalFilter;
+            }, 2000);
+        }
+        
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.style.position = 'absolute';
+            sparkle.style.width = '10px';
+            sparkle.style.height = '10px';
+            sparkle.style.background = 'radial-gradient(circle, #FFD700, #FFA500)';
+            sparkle.style.borderRadius = '50%';
+            sparkle.style.left = Math.random() * 750 + 'px';
+            sparkle.style.top = Math.random() * 450 + 'px';
+            sparkle.style.animation = 'sparkleAnimation 2s ease-out forwards';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.zIndex = '1000';
+            
+            // Add sparkle animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes sparkleAnimation {
+                    0% { opacity: 1; transform: scale(0) rotate(0deg); }
+                    50% { opacity: 1; transform: scale(1.5) rotate(180deg); }
+                    100% { opacity: 0; transform: scale(0) rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.getElementById('cartoon').appendChild(sparkle);
+            
+            // Remove sparkle after animation
+            setTimeout(() => {
+                if (sparkle.parentNode) {
+                    sparkle.parentNode.removeChild(sparkle);
+                }
+            }, 2000);
+        }
+        
+        // Auto-advance story
+        setInterval(() => {
+            changeScene();
+        }, 10000);
+        
+        // Add click interaction to character
+        document.getElementById('character').addEventListener('click', () => {
+            addMagic();
+        });
+        
+        // Add click interaction to bird
+        document.getElementById('bird').addEventListener('click', () => {
+            const bird = document.getElementById('bird');
+            bird.style.transform = 'scale(1.2)';
+            bird.style.filter = 'hue-rotate(45deg)';
+            
+            setTimeout(() => {
+                bird.style.transform = '';
+                bird.style.filter = '';
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
