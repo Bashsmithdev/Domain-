@@ -1,93 +1,550 @@
-# Bashir's Digital Products - Landing Page
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bashir's Digital Products - Premium Wealth Building Resources</title>
+    <meta name="description" content="Transform your financial future with proven digital wealth-building systems and premium courses.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23ffffff08" points="0,1000 1000,0 1000,1000"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: slideUp 1s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideUp 1s ease-out 0.3s both;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 1.2rem 3rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(238, 90, 82, 0.3);
+            animation: slideUp 1s ease-out 0.6s both;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(238, 90, 82, 0.4);
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #667eea;
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 5rem 0;
+            background: #f8f9ff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b6b, #667eea);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .product-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .product-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .product-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .product-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .product-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .testimonial {
+            background: #f8f9ff;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+            position: relative;
+        }
+        
+        .testimonial::before {
+            content: '"';
+            font-size: 4rem;
+            color: #667eea;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            opacity: 0.3;
+        }
+        
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #666;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: #f8f9ff;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .contact-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .disclaimer {
+            background: #f0f0f0;
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            border-radius: 50px;
+            padding: 15px 20px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">B</div>
+                <span>Bashir's Digital Store</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
 
-A modern, responsive landing page for selling digital products and educational resources. Built with HTML, CSS, and JavaScript, featuring contemporary design elements and smooth user interactions.
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Premium Digital Resources</h1>
+            <p>High-quality digital products and educational resources to help you build your online presence</p>
+            <a href="#products" class="cta-button">🚀 Explore Products</a>
+        </div>
+    </section>
 
-## 🌟 Features
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">📚 Featured Digital Products</h2>
+            <p style="text-align: center; color: #666; max-width: 600px; margin: 0 auto;">
+                Carefully crafted digital resources and templates to support your business and learning goals
+            </p>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-icon">💰</div>
+                    <h3>Business Strategy Guide</h3>
+                    <p>Comprehensive guide covering business fundamentals, planning strategies, and growth techniques with actionable templates.</p>
+                    <div class="price">₦15,000</div>
+                    <a href="#" class="product-button" onclick="showPurchaseInfo()">📖 Learn More</a>
+                </div>
 
-### Design & User Experience
-- **Modern Gradient Design** - Eye-catching purple-to-blue gradients with professional aesthetics
-- **Responsive Layout** - Optimized for desktop, tablet, and mobile devices
-- **Smooth Animations** - CSS keyframe animations for engaging user experience
-- **Interactive Elements** - Hover effects, floating buttons, and smooth scrolling navigation
-- **Contemporary UI** - Clean typography, card-based layouts, and modern visual hierarchy
+                <div class="product-card">
+                    <div class="product-icon">📚</div>
+                    <h3>Digital Marketing Templates</h3>
+                    <p>Professional templates for social media, email campaigns, and marketing materials to enhance your brand presence.</p>
+                    <div class="price">₦12,000</div>
+                    <a href="#" class="product-button" onclick="showPurchaseInfo()">🛒 Learn More</a>
+                </div>
 
-### Functional Components
-- **Fixed Navigation Bar** - Transparent navigation with blur effect
-- **Hero Section** - Compelling headline with animated call-to-action
-- **Product Showcase** - Grid layout featuring three main digital products
-- **Customer Testimonials** - Social proof section with styled testimonial cards
-- **Contact Information** - Multiple contact methods with icon-based design
-- **WhatsApp Integration** - Floating WhatsApp button for instant communication
-- **Smooth Scrolling** - JavaScript-powered smooth navigation between sections
+                <div class="product-card">
+                    <div class="product-icon">🎯</div>
+                    <h3>Content Creation Bundle</h3>
+                    <p>Ready-to-use content templates, graphics, and writing prompts to streamline your content creation process.</p>
+                    <div class="price">₦10,000</div>
+                    <a href="#" class="product-button" onclick="showPurchaseInfo()">🎨 Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-### Products Featured
-1. **Business Strategy Guide** (₦15,000) - Comprehensive business planning resource
-2. **Digital Marketing Templates** (₦12,000) - Professional marketing materials
-3. **Content Creation Bundle** (₦10,000) - Ready-to-use content templates
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">💬 Customer Feedback</h2>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <p>The templates saved me hours of work and helped me create professional-looking content.</p>
+                    <div class="testimonial-author">- Sarah M.</div>
+                </div>
+                
+                <div class="testimonial">
+                    <p>Great value for money. The business guide provided clear, actionable insights.</p>
+                    <div class="testimonial-author">- James O.</div>
+                </div>
+                
+                <div class="testimonial">
+                    <p>Professional quality resources that actually deliver what they promise.</p>
+                    <div class="testimonial-author">- Aisha K.</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-## 🛠 Technical Stack
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">📞 Get In Touch</h2>
+            <p style="text-align: center; color: #666;">
+                Questions about our products? We're here to help
+            </p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email</h3>
+                    <p>support@bashirdigital.com</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <h3>WhatsApp</h3>
+                    <p>+234 XXX XXX XXXX</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">🛒</div>
+                    <h3>Purchase</h3>
+                    <p>Secure checkout available</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-- **HTML5** - Semantic markup structure
-- **CSS3** - Advanced styling with gradients, animations, and flexbox/grid
-- **JavaScript** - Interactive functionality and smooth scrolling
-- **Responsive Design** - Mobile-first approach with media queries
+    <!-- Disclaimer -->
+    <section class="disclaimer">
+        <div class="container">
+            <p><strong>Disclaimer:</strong> Results may vary. No guarantee of specific outcomes. These are educational resources designed to provide information and templates. Success depends on individual effort, market conditions, and proper application of the materials.</p>
+        </div>
+    </section>
 
-## 🎨 Design Elements
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Bashir's Digital Products. All rights reserved.</p>
+        </div>
+    </footer>
 
-- **Color Scheme**: Purple (#667eea), Blue (#764ba2), Orange (#ff6b6b)
-- **Typography**: Segoe UI font family for modern readability
-- **Layout**: CSS Grid and Flexbox for responsive design
-- **Animations**: Custom keyframe animations for enhanced UX
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/234XXXXXXXXX" class="whatsapp-float" target="_blank">
+        💬 Chat with us
+    </a>
 
-## 📱 Mobile Optimization
+    <script>
+        function showPurchaseInfo() {
+            alert('To purchase this product, please contact us via WhatsApp or email. We accept secure payments and provide instant digital delivery.');
+        }
 
-- Responsive grid layouts that adapt to screen size
-- Touch-friendly button sizes and spacing
-- Optimized typography scaling
-- Mobile-specific navigation adjustments
-
-## 🚀 Getting Started
-
-1. **Clone or Download** the HTML file
-2. **Open** `index.html` in any modern web browser
-3. **Customize** content, colors, and contact information as needed
-4. **Deploy** to any web hosting service
-
-## 🔧 Customization
-
-### Content Updates
-- Update product information in the products section
-- Replace testimonials with actual customer feedback
-- Modify contact information (email, phone, WhatsApp)
-- Adjust pricing in Nigerian Naira (₦)
-
-### Design Modifications
-- Change color variables in the CSS
-- Update fonts by modifying the font-family declarations
-- Adjust animations by editing keyframe rules
-- Customize spacing and sizing with CSS variables
-
-### Functionality Enhancements
-- Integrate with payment processors
-- Add email subscription forms
-- Connect to analytics tracking
-- Implement live chat functionality
-
-## 📋 Browser Compatibility
-
-- Chrome 60+
-- Firefox 55+
-- Safari 12+
-- Edge 79+
-
-## 📄 License
-
-This project is open source and available under standard web development practices.
-
-## 🤝 Contributing
-
-Feel free to fork, modify, and adapt this landing page for your own digital products or services.
-
-## 📞 Support
-
-For questions about implementation or customization, refer to the contact methods shown in the landing page design.
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
